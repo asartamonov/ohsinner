@@ -1,4 +1,4 @@
-Oh!Sinner
+Oh!Sinner<return>
 is just an exercise in JDBC / SQL connections, updates etc.
 But it has funny underlaying logic, in fact it is electronic
 reconciliation-room, where you can share your sin and know a
