@@ -1,7 +1,7 @@
 package ru.asartamonov.ohsinner;
 
 /**
- * Alexander Artamonov (asartamonov@gmail.com) 2016.
+ * Entity - path
  */
 public class Path {
 
@@ -33,12 +33,10 @@ public class Path {
 
     static class PathManager {
         public static Path newInapprovedPath(int pathID, String pathDescription) {
-            //creation logic, dbManager calls
             return new Path(pathID, pathDescription, false);
         }
 
         public static Path newApprovedPath(int pathID, String pathDescription) {
-            //creation logic, dbManager calls
             return new Path(pathID, pathDescription, true);
         }
 

@@ -1,7 +1,7 @@
 package ru.asartamonov.ohsinner;
 
 /**
- * Alexander Artamonov (asartamonov@gmail.com) 2016.
+ * Entity - sin
  */
 public class Sin {
 

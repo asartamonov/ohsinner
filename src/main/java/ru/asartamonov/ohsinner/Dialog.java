@@ -3,12 +3,8 @@ package ru.asartamonov.ohsinner;
 import java.util.Scanner;
 
 /**
- * Alexander Artamonov (asartamonov@gmail.com) 2016.
- */
-
-
-/**
- * User interaction layer: user input, info messages
+ * User interaction layer: user input, info messages.
+ * This is only one layer, which user touches.
  * */
 public class Dialog {
 
@@ -74,10 +70,11 @@ public class Dialog {
         /* print famous users with same sins */
         if (fPersons != null && fPersons.length > 0) {
             System.out.printf("I hear you. I know some people with similar behavior:\n");
-            for (int i = 0; i < fPersons.length; i++) {
-                System.out.printf("%s from %s\n", fPersons[i].getName(), fPersons[i].getCity());
+            for (Person fPerson : fPersons) {
+                System.out.printf("%s from %s\n", fPerson.getName(), fPerson.getCity());
             }
         }
+        /* get user thoughts on possible paths */
         String userPathDescription;
         if (path == null) {
             System.out.println("There is no path known yet...");
@@ -93,7 +90,6 @@ public class Dialog {
                 System.out.println("Well, lets settle down in quietness..");
             }
         } else if (path.isApproved()) {
-            //print
             System.out.printf("Some people think there is a way. %s", path.getPathDescription());
         } else {
             System.out.printf("I don't know what to say, I have to think on it... " +

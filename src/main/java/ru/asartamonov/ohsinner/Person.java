@@ -1,7 +1,7 @@
 package ru.asartamonov.ohsinner;
 
 /**
- * Alexander Artamonov (asartamonov@gmail.com) 2016.
+ * Entity - person
  */
 public class Person {
 
@@ -42,12 +42,10 @@ public class Person {
 
     static class PersonManager {
         public static Person newSimplePerson(int age, String name, String city, int sinID) {
-            //creation logic, dbManager calls
             return new Person(age, name, city, sinID, false);
         }
 
         public static Person newFamousPerson(String name, String city, int sinID) {
-            //creation logic, dbManager calls
             return new Person(0, name, city, sinID, true);
         }
     }

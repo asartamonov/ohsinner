@@ -8,8 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Alexander Artamonov (asartamonov@gmail.com) 2016.
- */
+ *  Database interaction layer: queries, updates.
+ *  Methods invoked from outside of the class return
+ *  Java-object replies, not database entities.
+ *  All interaction with database only within this class.
+ * */
 public class DbManager {
     /* Our Database's URL and Driver to use. */
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -24,7 +27,6 @@ public class DbManager {
     /**
      * Returns ID of created person, -1 if error
      */
-    @Nullable
     public static int createPerson(Person person) {
         PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
@@ -46,6 +48,7 @@ public class DbManager {
                 return keys.getInt(1);
             }
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,6 +85,7 @@ public class DbManager {
             }
             return fPersons;
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -114,10 +118,10 @@ public class DbManager {
                 if (pathIsApproved)
                     path = Path.PathManager.newApprovedPath(pathID, pathDescription);
                 else path = Path.PathManager.newInapprovedPath(pathID, pathDescription);
-                Sin sin = Sin.SinManager.newSin(sinID, sinName, fPearsons, path);
-                return sin;
+                return Sin.SinManager.newSin(sinID, sinName, fPearsons, path);
             }
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -146,6 +150,7 @@ public class DbManager {
             }
             return Sin.SinManager.newSin(sinID, sinName, null, null);
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -166,15 +171,15 @@ public class DbManager {
             statement.setInt(2, sinID);
             statement.executeUpdate();
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    @Nullable
     public static int createPath(String pathDescription, boolean isApproved) {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
             Class.forName(JDBC_DRIVER);
             String createPathQuery = "" +
@@ -189,6 +194,7 @@ public class DbManager {
                 return keys.getInt(1);
             }
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -226,6 +232,7 @@ public class DbManager {
             statement.setInt(2, pathID);
             statement.executeUpdate();
         } catch (ClassNotFoundException e) {
+            System.out.println("Database driver loading error");
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
