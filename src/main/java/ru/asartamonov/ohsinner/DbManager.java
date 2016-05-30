@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
  * Methods invoked from outside of the class return
  * Java-object replies, not database entities.
  * All interaction with database only within this class.
+ *
+ * SQL injection prevented by checking type and number of args
+ * stop-list word checking also performed
  */
 public class DbManager {
     /* Our Database's URL and Driver to use. */
