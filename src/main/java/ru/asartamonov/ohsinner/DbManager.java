@@ -8,11 +8,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- *  Database interaction layer: queries, updates.
- *  Methods invoked from outside of the class return
- *  Java-object replies, not database entities.
- *  All interaction with database only within this class.
- * */
+ * Database interaction layer: queries, updates.
+ * Methods invoked from outside of the class return
+ * Java-object replies, not database entities.
+ * All interaction with database only within this class.
+ */
 public class DbManager {
     /* Our Database's URL and Driver to use. */
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
@@ -56,6 +56,10 @@ public class DbManager {
         return -1;
     }
 
+    /**
+     * @param sinID - unique identifier of sin (primary key in database)
+     * @return array of famous person with this sinID
+     */
     @Nullable
     public static Person[] getFamousPersons(int sinID) {
         ResultSet resultSet;
@@ -93,6 +97,10 @@ public class DbManager {
         return null;
     }
 
+    /**
+     * @return Sin object if database already contains row with this sinName
+     * null otherwise
+     */
     @Nullable
     public static Sin getSin(String sinName) {
         ResultSet resultSet;
@@ -130,7 +138,7 @@ public class DbManager {
     }
 
     /**
-     * Returns ID of created sin, -1 if error
+     * @return Sin object or null if unsuccessfull
      */
     @Nullable
     public static Sin createSin(String sinName) {
@@ -158,6 +166,9 @@ public class DbManager {
         return null;
     }
 
+    /**
+     * sets sin pathID with provided pathID
+     */
     public static void setSinPath(int pathID, int sinID) {
         PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
@@ -178,6 +189,9 @@ public class DbManager {
         }
     }
 
+    /**
+     * creates path according to description and type
+     */
     public static int createPath(String pathDescription, boolean isApproved) {
         PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
@@ -202,6 +216,9 @@ public class DbManager {
         return 0;
     }
 
+    /**
+     * changes description of the path
+     */
     public static void setPathDescription(String pathDescription, int pathID) {
         PreparedStatement statement;
         try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASS)) {
