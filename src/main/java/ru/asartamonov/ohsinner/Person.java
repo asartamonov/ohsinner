@@ -41,11 +41,11 @@ public class Person {
     }
 
     static class PersonManager {
-        public static Person newSimplePerson(int age, String name, String city, int sinID) {
+        public static Person getSpersonInstance(int age, String name, String city, int sinID) {
             return new Person(age, name, city, sinID, false);
         }
 
-        public static Person newFamousPerson(String name, String city, int sinID) {
+        public static Person getFpersonInstance(String name, String city, int sinID) {
             return new Person(0, name, city, sinID, true);
         }
     }

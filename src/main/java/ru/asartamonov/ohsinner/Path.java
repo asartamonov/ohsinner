@@ -32,15 +32,15 @@ public class Path {
     }
 
     static class PathManager {
-        public static Path newInapprovedPath(int pathID, String pathDescription) {
+        public static Path getUnappdPathInstance(int pathID, String pathDescription) {
             return new Path(pathID, pathDescription, false);
         }
 
-        public static Path newApprovedPath(int pathID, String pathDescription) {
+        public static Path getAppdPathInstance(int pathID, String pathDescription) {
             return new Path(pathID, pathDescription, true);
         }
 
-        public static void syncPathWithDB(Sin sin, Path path) {
+        public static void wireSinAndPath(Sin sin, Path path) {
             if (path.getPathID() != 0)
                 DbManager.setPathDescription(path.getPathDescription(), path.getPathID());
             else {

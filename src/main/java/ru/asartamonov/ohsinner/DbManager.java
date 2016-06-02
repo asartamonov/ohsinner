@@ -85,7 +85,7 @@ public class DbManager {
                 for (int i = 0; i < fPersons.length; i++) {
                     fPersonName = resultSet.getNString("personName");
                     fPersonCity = resultSet.getNString("personCity");
-                    fPersons[i] = Person.PersonManager.newFamousPerson(fPersonName, fPersonCity, sinID);
+                    fPersons[i] = Person.PersonManager.getFpersonInstance(fPersonName, fPersonCity, sinID);
                 }
             } else {
                 fPersons = null;
@@ -127,9 +127,9 @@ public class DbManager {
                 Person[] fPearsons = DbManager.getFamousPersons(sinID);
                 Path path;
                 if (pathIsApproved)
-                    path = Path.PathManager.newApprovedPath(pathID, pathDescription);
-                else path = Path.PathManager.newInapprovedPath(pathID, pathDescription);
-                return Sin.SinManager.newSin(sinID, sinName, fPearsons, path);
+                    path = Path.PathManager.getAppdPathInstance(pathID, pathDescription);
+                else path = Path.PathManager.getUnappdPathInstance(pathID, pathDescription);
+                return Sin.SinManager.getInstance(sinID, sinName, fPearsons, path);
             }
         } catch (ClassNotFoundException e) {
             System.out.println("Database driver loading error");
@@ -159,7 +159,7 @@ public class DbManager {
             if (keys.next()) {
                 sinID = keys.getInt(1);
             }
-            return Sin.SinManager.newSin(sinID, sinName, null, null);
+            return Sin.SinManager.getInstance(sinID, sinName, null, null);
         } catch (ClassNotFoundException e) {
             System.out.println("Database driver loading error");
             e.printStackTrace();

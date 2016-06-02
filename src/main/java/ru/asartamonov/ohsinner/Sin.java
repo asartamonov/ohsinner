@@ -38,12 +38,12 @@ public class Sin {
     }
 
     static class SinManager {
-        public static Sin newSin(String sinName) {
+        public static Sin getInstance(String sinName) {
             Sin sin = DbManager.getSin(sinName);
             return sin == null ? DbManager.createSin(sinName) : sin;
         }
 
-        public static Sin newSin(int sinID, String sinName, Person[] fPersons, Path path) {
+        public static Sin getInstance(int sinID, String sinName, Person[] fPersons, Path path) {
             return new Sin(sinID, sinName, fPersons, path);
         }
     }

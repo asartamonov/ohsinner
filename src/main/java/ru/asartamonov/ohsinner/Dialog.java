@@ -53,7 +53,7 @@ public class Dialog {
          * - create new if not present in database
          * - take from database if already presented
          * */
-        Sin sin = Sin.SinManager.newSin(dialog.userSinName);
+        Sin sin = Sin.SinManager.getInstance(dialog.userSinName);
         Person person;
         Person[] fPersons = null;
         Path path = null;
@@ -61,7 +61,7 @@ public class Dialog {
         /* init data */
         if (sin != null) {
             person = Person.PersonManager
-                    .newSimplePerson(dialog.userAge, dialog.userName, dialog.userCity, sin.getSinID());
+                    .getSpersonInstance(dialog.userAge, dialog.userName, dialog.userCity, sin.getSinID());
             DbManager.createPerson(person);
             fPersons = sin.getFamPersons();
             path = sin.getPath();
@@ -83,8 +83,8 @@ public class Dialog {
             Scanner sc = new Scanner(System.in);
             userPathDescription = sc.nextLine();
             if (!userPathDescription.isEmpty()) {
-                Path newPath = Path.PathManager.newInapprovedPath(0, userPathDescription);
-                Path.PathManager.syncPathWithDB(sin, newPath);
+                Path newPath = Path.PathManager.getUnappdPathInstance(0, userPathDescription);
+                Path.PathManager.wireSinAndPath(sin, newPath);
                 System.out.println("I hear you, give me time to consider, goodbye for now...");
             } else {
                 System.out.println("Well, lets settle down in quietness..");
@@ -98,7 +98,7 @@ public class Dialog {
             Scanner sc = new Scanner(System.in);
             userPathDescription = sc.nextLine();
             path.setPathDescription(path.getPathDescription() + " " + userPathDescription);
-            Path.PathManager.syncPathWithDB(sin, path);
+            Path.PathManager.wireSinAndPath(sin, path);
             System.out.println("I hear you, give me time to consider, goodbye for now...");
         }
     }
